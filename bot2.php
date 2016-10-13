@@ -72,7 +72,7 @@ if (!is_null($events['events'])) {
 			
 			$messages = [
 				'type' => 'text',
-				'text' => "คุณ".$name."มาใช้บริการ โดย UserID คือ".$useid 
+				'text' => "คุณ ".$name." มาใช้บริการ โดย UserID คือ ".$useid 
 			];
 
 			// Make a POST Request to Messaging API to reply to sender
