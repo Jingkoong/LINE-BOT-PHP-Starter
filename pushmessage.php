@@ -16,7 +16,7 @@ $access_token = 'IuM1APpXsYJiNcxSom3dxgpTGQj6A/gRFF1crr+uuGB6HqM7a4g2SKgX91zMC3T
 			// Make a POST Request to Messaging API to reply to sender
 			$url = 'https://api.line.me/v2/bot/message/push';
 			$data = [
-				'to' => 'jingk00ng',
+				'to' => 'Uf6fc670282d1f0a8b1d48ace208e8422',
 				'messages' => [$messages],
 			];
 			$post = json_encode($data);
