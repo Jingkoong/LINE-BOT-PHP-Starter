@@ -10,7 +10,7 @@ $access_token = 'IuM1APpXsYJiNcxSom3dxgpTGQj6A/gRFF1crr+uuGB6HqM7a4g2SKgX91zMC3T
 			// Build message to reply back
 			$messages = [
 				'type' => 'text',
-				'text' => "แวมแวมอ้วน"
+				'text' => "The time is " . date("h:i:sa")
 			];
 
 			// Make a POST Request to Messaging API to reply to sender
