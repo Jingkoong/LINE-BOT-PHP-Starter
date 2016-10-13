@@ -6,7 +6,8 @@ date_default_timezone_set("Asia/Bangkok");
 			$text = $event['message']['text'];
 			// Get replyToken
 			$replyToken = $event['replyToken'];
-
+			// Get useid
+			$useid = $event['source']['userId'];
 			// Build message to reply back
 			$messages = [
 				'type' => 'text',
