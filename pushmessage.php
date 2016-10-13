@@ -1,6 +1,6 @@
 <?php
 $access_token = 'IuM1APpXsYJiNcxSom3dxgpTGQj6A/gRFF1crr+uuGB6HqM7a4g2SKgX91zMC3TKHNLJ9NqhDN7/1FTKfhmJ6K3TOG2srD5uby0WFgydq5w9g6F55c6VlpuU7oqDlGb3cFNhLW4f+7Ju/3vx2uMyKAdB04t89/1O/w1cDnyilFU=';
-
+date_default_timezone_set("Asia/Bangkok");
 
 			// Get text sent
 			$text = $event['message']['text'];
@@ -10,7 +10,7 @@ $access_token = 'IuM1APpXsYJiNcxSom3dxgpTGQj6A/gRFF1crr+uuGB6HqM7a4g2SKgX91zMC3T
 			// Build message to reply back
 			$messages = [
 				'type' => 'text',
-				'text' => "The time is " . date("h:i:sa")
+				'text' => "ขณะนี้เวลา " . date("h:i:sa")
 			];
 
 			// Make a POST Request to Messaging API to reply to sender
