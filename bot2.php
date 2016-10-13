@@ -41,17 +41,44 @@ if (!is_null($events['events'])) {
 			$result = curl_exec($ch);
 			curl_close($ch);
 			//echo $result . "\r\n";
-			$name = $result['displayName'];
+			$obj = json_decode($result);
+			$name = $obj->{'displayName'};
 			
 			$messages = [
 				'type' => 'text',
-				'text' => "สวัสดีคุณ".$useid."ขณะนี้เวลา " . date("h:i:sa")
+				'text' => "สวัสดีคุณ".$name."ขณะนี้เวลา " . date("h:i:sa")
 			];
 			
 			// Make a POST Request to Messaging API to reply to sender
 			$url = 'https://api.line.me/v2/bot/message/reply';
 			$data = [
 				'replyToken' => $replyToken,
+				'messages' => [$messages],
+			];
+			$post = json_encode($data);
+			$headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $access_token);
+
+			$ch = curl_init($url);
+			curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+			curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+			curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+			curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+			$result = curl_exec($ch);
+			curl_close($ch);
+
+			echo $result . "\r\n";
+			
+			
+			$messages = [
+				'type' => 'text',
+				'text' => "คุณ".$name."มาใช้บริการ โดย UserID คือ".$useid 
+			];
+
+			// Make a POST Request to Messaging API to reply to sender
+			$url = 'https://api.line.me/v2/bot/message/push';
+			$data = [
+				'to' => 'Uf6fc670282d1f0a8b1d48ace208e8422',
 				'messages' => [$messages],
 			];
 			$post = json_encode($data);
