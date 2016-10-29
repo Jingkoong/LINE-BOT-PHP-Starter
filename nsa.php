@@ -20,7 +20,7 @@ function nsaEncrypt($key, $plainText)
 	return $result;
 }
 
-nsaEncrypt(555,"hello");
+echo nsaEncrypt(555,"hello");
 
 /*
 
