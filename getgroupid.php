@@ -14,4 +14,6 @@ $result = curl_exec($ch);
 curl_close($ch);
 $obj = json_decode($result);
 $name = $obj->{'displayName'};
-echo $name;
+echo $name."<br>";
+var_dump($obj);
+
