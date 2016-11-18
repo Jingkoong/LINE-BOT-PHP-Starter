@@ -17,7 +17,7 @@ date_default_timezone_set("Asia/Bangkok");
 			// Make a POST Request to Messaging API to reply to sender
 			$url = 'https://api.line.me/v2/bot/message/push';
 			$data = [
-				'to' => 'Uf6fc670282d1f0a8b1d48ace208e8422',
+				'to' => 'Ua912d9ff96886713d731319c8d58436d',
 				'messages' => [$messages],
 			];
 			$post = json_encode($data);
