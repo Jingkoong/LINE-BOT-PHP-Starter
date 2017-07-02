@@ -17,7 +17,7 @@ if ($response->isSucceeded()) {
     $tempfile = tmpfile();
     fwrite($tempfile, $response->getRawBody());
 	var_dump($response);
-	echo "<br><br><br>".$response->getRawBody()."<br><br><br>">;
+	echo "Succeeded<br>";
 } else {
 	echo "FAIL<br>";
     error_log($response->getHTTPStatus() . ' ' . $response->getRawBody());
