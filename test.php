@@ -16,6 +16,7 @@ if ($response->isSucceeded()) {
 	echo "GetMSG<br>";
     $tempfile = tmpfile();
     fwrite($tempfile, $response->getRawBody());
+	var_dump($response->getRawBody());
 	echo "Succeeded<br>";
 } else {
 	echo "FAIL<br>";
