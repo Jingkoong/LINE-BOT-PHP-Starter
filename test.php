@@ -9,18 +9,51 @@ use \LINE\LINEBot\MessageBuilder\TextMessageBuilder;
 $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient('IuM1APpXsYJiNcxSom3dxgpTGQj6A/gRFF1crr+uuGB6HqM7a4g2SKgX91zMC3TKHNLJ9NqhDN7/1FTKfhmJ6K3TOG2srD5uby0WFgydq5w9g6F55c6VlpuU7oqDlGb3cFNhLW4f+7Ju/3vx2uMyKAdB04t89/1O/w1cDnyilFU=');
 $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => '2fa416dd228a8bc1a9ceaa51fc768f48']);
 
-echo "Start<br>";
+$access_token = 'IuM1APpXsYJiNcxSom3dxgpTGQj6A/gRFF1crr+uuGB6HqM7a4g2SKgX91zMC3TKHNLJ9NqhDN7/1FTKfhmJ6K3TOG2srD5uby0WFgydq5w9g6F55c6VlpuU7oqDlGb3cFNhLW4f+7Ju/3vx2uMyKAdB04t89/1O/w1cDnyilFU=';
 
-$response = $bot->getMessageContent('6328682950755');
-if ($response->isSucceeded()) {
-	echo "GetMSG<br>";
-    $tempfile = tmpfile();
-    fwrite($tempfile, $response->getRawBody());
-	var_dump($response);
-	echo "Succeeded<br>";
-} else {
-	echo "FAIL<br>";
-    error_log($response->getHTTPStatus() . ' ' . $response->getRawBody());
+// Get POST body content
+$content = file_get_contents('php://input');
+// Parse JSON
+$events = json_decode($content, true);
+// Validate parsed JSON data
+if (!is_null($events['events'])) {
+	// Loop through each event
+	foreach ($events['events'] as $event) {
+		// Reply only when message sent is in 'text' format
+		if ($event['type'] == 'message' && $event['message']['type'] == 'text') {
+			// Get text sent
+			$text = $event['message']['text'];
+			// Get replyToken
+			$replyToken = $event['replyToken'];
+			// Get MessageID
+			$MessageID = $event['message']['id'];
+
+
+			$response = $bot->replyText($replyToken, $MessageID);
+			echo $response->getHTTPStatus() . ' ' . $response->getRawBody();
+		}
+		else
+		{
+			// Get replyToken
+			$replyToken = $event['replyToken'];
+			// Get MessageID
+			$MessageID = $event['message']['id'];
+			
+			$response = $bot->replyText($replyToken, $MessageID);
+			echo $response->getHTTPStatus() . ' ' . $response->getRawBody();
+			
+			$response = $bot->getMessageContent($MessageID);
+			if ($response->isSucceeded()) {
+
+				$tempfile = tmpfile();
+				fwrite($tempfile, $response->getRawBody());
+				var_dump($response);
+
+			} else {
+
+				error_log($response->getHTTPStatus() . ' ' . $response->getRawBody());
+			}
+		}
+	}
 }
-
 echo "OK";
