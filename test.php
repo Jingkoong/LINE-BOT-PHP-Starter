@@ -28,6 +28,7 @@ if (!is_null($events['events'])) {
 
 
 			$response = $bot->replyText($replyToken, 'hello!');
+			echo $response->getHTTPStatus() . ' ' . $response->getRawBody();
 		}
 	}
 }
