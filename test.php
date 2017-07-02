@@ -32,6 +32,16 @@ if (!is_null($events['events'])) {
 			$response = $bot->replyText($replyToken, $MessageID);
 			echo $response->getHTTPStatus() . ' ' . $response->getRawBody();
 		}
+		else
+		{
+			// Get replyToken
+			$replyToken = $event['replyToken'];
+			// Get MessageID
+			$MessageID = $event['message']['id'];
+			
+			$response = $bot->replyText($replyToken, $MessageID);
+			echo $response->getHTTPStatus() . ' ' . $response->getRawBody();
+		}
 	}
 }
 echo "OK";
