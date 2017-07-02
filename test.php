@@ -14,6 +14,7 @@ $response = $bot->getMessageContent('6328682950755');
 if ($response->isSucceeded()) {
     $tempfile = tmpfile();
     fwrite($tempfile, $response->getRawBody());
+	echo "Succeeded<br>";
 } else {
     error_log($response->getHTTPStatus() . ' ' . $response->getRawBody());
 }
