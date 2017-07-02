@@ -39,7 +39,7 @@ if (!is_null($events['events'])) {
 			// Get MessageID
 			$MessageID = $event['message']['id'];
 			
-			$response = $bot->replyText($replyToken, $MessageID);
+			
 			echo $response->getHTTPStatus() . ' ' . $response->getRawBody();
 			
 			$response = $bot->getMessageContent($MessageID);
@@ -48,6 +48,7 @@ if (!is_null($events['events'])) {
 				$tempfile = tmpfile();
 				fwrite($tempfile, $response->getRawBody());
 				var_dump($response);
+				$response = $bot->replyText($replyToken, $response);
 
 			} else {
 
